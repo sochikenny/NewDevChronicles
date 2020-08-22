@@ -5,6 +5,7 @@ const exphbs = require('express-handlebars')
 const morgan = require('morgan')
 const passport = require('passport')
 const session = require('express-session')
+const MongoStore = require('connect-mongo')(session)
 const path = require('path')
 
 //Load Config
@@ -29,6 +30,7 @@ app.use(session({
   secret: 'keyboard warrior',
   resave: false,
   saveUninitialized: false,
+  store: new MongoStore({ mongooseConnection: mongoose.connection})
 }))
 
 //Passport Middleware
